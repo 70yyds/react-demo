@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      // 定义时间的时候不要带小括号   带小括号的含义是将此事件赋值了立即执行  不能带小括号
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { isHot: false };
+          console.log(22);
+          this.newclick = this.clickNow.bind(this); //解决this指向问题
+          //2
+          //解体分析  this 当前实例的指向   this.clickNow当前实例的函数  bind(this)把实例的指向赋给这个函数 并 返回一个新的函数
+        }
+        render() {
+          const { isHot } = this.state; //拿到状态 解构一下阅读性更好
+          return (
+            //1
+            //如果这里直接this.clicknow实际上是 在严格模式下 直接找到clickNow方法直接拉出来执行了
+            //这样其实是绕开了实例的执行  而严格模式下打印this并不会指向window，指的是undefined
+
+            //3 执行这个新的函数
+            <strong onClick={this.newclick}>
+              今天很{isHot ? "凉爽" : "炎热"}
+            </strong>
+          );
+        }
+        clickNow() {
+          const { isHot } = this.state;
+          // 修改状态必须用setState  且更新是合并操作
+          this.setState({ isHot: !isHot });
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

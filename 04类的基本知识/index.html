@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类的基本知识</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 定义一个基础类
+      class Person {
+        //编辑一个构造器
+        constructor(name, age) {
+          //构造器中的this指向各自的实例对象
+          this.name = name;
+          this.age = age;
+        }
+        speak() {
+          console.log(`我是${this.name},我${this.age}了`);
+        }
+      }
+      //定义一个继承类
+      class Student extends Person {
+        constructor(name, age, grade) {
+          //继承类必须使用super传递参数对象
+          super(name, age);
+          this.grade = grade;
+        }
+        // 重写父类中的方法
+        speak() {
+          console.log(`我是${this.name},我${this.age}了,我在读${this.grade}`);
+        }
+      }
+      //创建一个person实例
+      const p1 = new Person("bgt", 123);
+      const p2 = new Student("wy", 233, "高二");
+      // 这里p1实例在调用speak的时候   实际上是调用person类中speak函数
+      //此时speak是peroson的speak  speak中的this指向各自的实例
+      p1.speak();
+
+      //当student类中没有speak方法时  会顺着原型链查找父类中是否有，有就调用
+      //当student中有的话就直接调用
+      p2.speak();
+    </script>
+  </body>
+</html>
