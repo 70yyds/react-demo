@@ -16,16 +16,12 @@
     ></script>
     <script type="text/javascript" src="../js/babel.min.js"></script>
     <script type="text/babel">
-      //定义一个函数式组件
-      //函数式组件的规则
-      // 1 命名首字母必须大写
-      // 2 挂载的时候需要用单标签
-      //找到这个组件后将它的返回值挂载渲染到真实dom上
-      function Demo() {
-        return <strong>this is a demo</strong>;
-      }
-      //渲染组件到页面上
-      ReactDOM.render(<Demo />, document.getElementById("test"));
+      const VDOM = (
+        <h1>
+          <span>hello react</span>
+        </h1>
+      );
+      ReactDOM.render(VDOM, document.getElementById("test"));
     </script>
   </body>
 </html>

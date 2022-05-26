@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <div id="test2"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 限制prop的类型 -->
+    <script src="../js/prop-types.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        //static 关键字 只给类自身加两个属性    否则是加给实例的，这段不会生效
+        // 指定标签属性数据类型和规则  进来之后react会找propTypes和defaultprops 没有的话接着往下走  有就执行
+        static propTypes = {
+          name: PropTypes.string.isRequired, //必填
+          age: PropTypes.number,
+          speak: PropTypes.func,
+        };
+        // 指定默认标签属性值
+        static defaultProps = {
+          age: 18,
+          grade: "不上了",
+        };
+        render() {
+          const { name, age, grade } = this.props;
+          return (
+            <ul onClick={speak}>
+              <li>我是{name}</li>
+              <li>我{age}</li>
+              <li>我上{grade}</li>
+            </ul>
+          );
+        }
+      }
+      function speak() {
+        console.log("i am speaking");
+      }
+      const data = { name: "张三", age: 22, grade: "高三" };
+      const data2 = { name: "张三" };
+      // 这里的展开运算符的括号其实是react的插值括号，并不是js中常规的{...obj}[...arr]中的括号含义  js中常规的括号就是定义一个空对象或者数组
+      //js中...data其实是报错的   这里...data可以是因为react和babel的关系 允许这样使用
+      ReactDOM.render(<Demo {...data} />, document.getElementById("test"));
+      ReactDOM.render(<Demo {...data2} />, document.getElementById("test2"));
+    </script>
+  </body>
+</html>

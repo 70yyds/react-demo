@@ -16,15 +16,22 @@
     ></script>
     <script type="text/javascript" src="../js/babel.min.js"></script>
     <script type="text/babel">
-      //定义一个函数式组件
-      //函数式组件的规则
-      // 1 命名首字母必须大写
-      // 2 挂载的时候需要用单标签
-      //找到这个组件后将它的返回值挂载渲染到真实dom上
-      function Demo() {
-        return <strong>this is a demo</strong>;
+      class Demo extends React.Component {
+        state = { isHot: false };
+        render() {
+          const { isHot } = this.state; //拿到状态 解构一下阅读性更好
+          return (
+            <strong onClick={this.clickNow}>
+              今天很{isHot ? "凉爽" : "炎热"}
+            </strong>
+          );
+        }
+        // 箭头函数没有自己的this  会往外找  外层的this  所以这里的this就是demo的实例对象
+        clickNow = () => {
+          const { isHot } = this.state;
+          this.setState({ isHot: !isHot });
+        };
       }
-      //渲染组件到页面上
       ReactDOM.render(<Demo />, document.getElementById("test"));
     </script>
   </body>
