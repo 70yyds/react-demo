@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <script src="../js/prop-types.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      class Demo extends React.Component {
+        render() {
+          const { name, age } = this.props;
+          return (
+            <div>
+              {/*内联形式  e 当前节点  把当前节点赋值给实例的input1   在箭头函数中this就是当前实例  解构拿到*/}
+              {/*但切换的时候会执行两次   大多数情况下无所谓*/}
+              <input ref={(e) => (this.input1 = e)} type="text" />
+              <button onClick={this.alert1}>提示一下</button>
+              <input
+                ref={(e) => (this.input2 = e)}
+                type="text"
+                onBlur={this.alert2}
+              />
+            </div>
+          );
+        }
+        alert1 = () => {
+          const { input1 } = this;
+          alert(input1.value);
+        };
+        alert2 = () => {
+          const { input2 } = this;
+          alert(input2.value);
+        };
+      }
+      const data = { name: "hhh", age: 222 };
+      ReactDOM.render(<Demo {...data} />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
