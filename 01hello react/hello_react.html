@@ -17,7 +17,7 @@
     ></script>
     <!-- 引入babel 将jsx转为js -->
     <script type="text/javascript" src="../js/babel.min.js"></script>
-    <script type="text/babel">
+    <!-- <script type="text/babel">
       //使用jsx创建虚拟dom
       const VDOM = (
         <h1>
@@ -28,6 +28,10 @@
       ReactDOM.render(VDOM, document.getElementById("test"));
       // javascript XML   简称jsx
       // 虚拟dom是一个普通的object对象
+    </script> -->
+    <script type="text/babel">
+      const VDOM = <h1>this is restudy</h1>;
+      ReactDOM.render(VDOM, document.getElementById("test"));
     </script>
   </body>
 </html>

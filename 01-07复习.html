@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <script src="../js/prop-types.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      //定义函数式组件
+      function FucCom(props) {
+        const { name, age, grade } = props;
+        return (
+          <div>
+            <span>这是函数式组件</span>
+            <br />
+            <strong>{name}</strong>
+            <strong>{age}</strong>
+            <strong>{grade}</strong>
+            <br /> <br />
+          </div>
+        );
+      }
+      class ClCom extends React.Component {
+        static propTypes = {
+          name: PropTypes.string.isRequired,
+        };
+        static defaultProp = {
+          name: "红红火火恍恍惚惚",
+        };
+        state = { isHot: false };
+        render() {
+          const { name, age, grade } = this.props;
+          const { isHot } = this.state;
+          return (
+            <div>
+              <span>这是类式组件</span>;
+              <br />
+              <strong>{name}</strong>
+              <strong>{age}</strong>
+              <strong>{grade}</strong>
+              <br />
+              <input type="text" ref={(e) => (this.input = e)} />
+              <button onClick={this.speak}>我要说话</button>
+              <br />
+              <span onClick={this.changeWeather}>
+                今天天气很{isHot ? "炎热" : "凉爽"}
+              </span>
+            </div>
+          );
+        }
+        speak = () => {
+          const { input } = this;
+          alert(input.value);
+        };
+        changeWeather = () => {
+          const { isHot } = this.state;
+          this.setState({ isHot: !isHot });
+        };
+      }
+      //定义类式组件
+      const funcData = { name: "函数式组件", age: 99, grade: "大三" };
+      const classData = { name: "类式组件", age: 92, grade: "大一" };
+      ReactDOM.render(
+        <FucCom {...funcData} />,
+        document.getElementById("test1")
+      );
+
+      ReactDOM.render(
+        <ClCom {...classData} />,
+        document.getElementById("test2")
+      );
+    </script>
+  </body>
+</html>

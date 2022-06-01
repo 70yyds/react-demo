@@ -19,30 +19,48 @@
     <script type="text/javascript" src="../js/babel.min.js"></script>
     <script type="text/babel">
       // 1 使用变量  需要使用大括号
-      // 2 类型要用className
+      // 2 类名要用className
       // 3 内联样式style 要使用双层大括号  驼峰
       // 4 必须有且只有一个根标签
-      const mytitle = "heLlo ReAct111";
-      const myid = "idid";
-      const arr = ["小明", "222", "3333"];
-      const VDOM = (
-        <div>
-          <h1 className="test" id={myid}>
-            <span style={{ color: "red", marginLeft: 30 + "px" }}>
-              {mytitle.toLowerCase()}
-            </span>
+      // const mytitle = "heLlo ReAct111";
+      // const myid = "idid";
+      // const arr = ["小明", "222", "3333"];
+      // const VDOM = (
+      //   <div>
+      //     <h1 className="test" id={myid}>
+      //       <span style={{ color: "red", marginLeft: 30 + "px" }}>
+      //         {mytitle.toLowerCase()}
+      //       </span>
+      //       <ul>
+      //         {arr.map((item, index) => {
+      //           return <li key={index}>{item}</li>;
+      //         })}
+      //       </ul>
+      //     </h1>
+      //   </div>
+      // );
+      // // 表达式 和 语句的区别
+      // // 表达式都有返回值
+      // // 语句是控制代码的走向  比如 遍历 判断等
+      // ReactDOM.render(VDOM, document.getElementById("test"));
+      const idName = "idnAMe";
+      const Cn = "cn";
+      const arr = [1, 2, 3, 4];
+      function Demo() {
+        return (
+          <div>
+            <h1 className={Cn} id={idName}>
+              {idName.toUpperCase()}
+            </h1>
             <ul>
-              {arr.map((item, index) => {
-                return <li key={index}>{item}</li>;
+              {arr.map((i,j) => {
+                return <li key={j}>{i}</li>;
               })}
             </ul>
-          </h1>
-        </div>
-      );
-      // 表达式 和 语句的区别
-      // 表达式都有返回值
-      // 语句是控制代码的走向  比如 遍历 判断等
-      ReactDOM.render(VDOM, document.getElementById("test"));
+          </div>
+        );
+      }
+      ReactDOM.render(<Demo />, document.getElementById("test"));
     </script>
   </body>
 </html>
